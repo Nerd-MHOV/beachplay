@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Client {
+  id        String @id
+  name      String
+  pass      String @default("-")
+  id_number String @unique
+  qr        String @unique @default("-")
+  phone     String
+}
+
+model clientes {
+  id        Int    @id(map: "clientes_pk")
+  number    String @db.VarChar
+  password  String @default("-") @db.VarChar
+  id_qrcode Int    @unique(map: "clientes_pk2")
+  name      String @db.VarChar
+}
+
+model qrcode {
+  id       Int     @id(map: "qrcode_pk")
+  qrcode   String  @unique
+  path     String
+  impresso Boolean @default(false)
+}
+
+model qrcodes {
+  id             Int     @id @default(autoincrement())
+  uid            String? @unique(map: "qrcodes_pk")
+  jpeg_name      String?
+  fast_id        Int?    @unique(map: "qrcodes_pk2")
+  nome_associado String?
+  impresso       String?
+}
+
+model cams {
+  id    Int    @id @default(autoincrement())
+  xaddr String
+  user  String
+  pass  String
+}
