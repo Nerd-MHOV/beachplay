@@ -5,3 +5,4 @@ node_modules
 .vscode
 src/public/media/watermark/*
 src/public/media/no_watermark/*
+db/*.db
