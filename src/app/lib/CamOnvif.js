@@ -2,8 +2,7 @@ import onvif from "node-onvif"
 import {format} from "date-fns";
 import {recorders} from "./Recorders"
 import Recorder from "rtsp-video-recorder"
-import Queue from "./Queue";
-import FileCam from "./FilesCam"
+import { RecorderEvents } from "rtsp-video-recorder";
 export default {
     async startRecord(cam, client) {
         console.log("[ INFO ] - (startRecord) - starting....")
@@ -11,7 +10,6 @@ export default {
         const camId = `cam${cam.id}`
         if(!recorders[camId] || !recorders[camId].isRecording()) {
             const device = new onvif.OnvifDevice(cam)
-
             return device.init()
                 .then(() => {
 
@@ -23,9 +21,15 @@ export default {
                     recorders[camId] = new Recorder(url, __dirname + "/../../public/media/no_watermark/", {
                         title: `Camera ${cam} - ${filePattern}`,
                         filePattern,
-                    })
+                        segmentTime: 0,
+                    }).on(RecorderEvents.STOP, (param) => {
+                        console.log(`STOP CAM ${camId}`, param)
+                    }).on(RecorderEvents.START, (param) => {
+                        console.log(`START CAM ${camId}`, param)
+                    }).on(RecorderEvents.ERROR, (param) => {
+                        console.log(`ERROR CAM ${camId}`, param)
+                    }).start()
                     recorders[camId].recordFilePath = filePattern;
-                    recorders[camId].start();
 
                     return {
                         status: 200,

@@ -26,7 +26,7 @@ createBullBoard({
 
 const app = express()
 app.use(express.json())
-app.use(morgan('dev'))
+// app.use(morgan('dev'))
 
 app.get("/record/:cam/:id", CamCtrl.record);
 app.get("/stop/:cam", CamCtrl.stop);

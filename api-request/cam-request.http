@@ -1,0 +1,12 @@
+###
+GET http://localhost:3333/record/2/1
+
+###
+GET http://localhost:3333/stop/2?proceed=true&id=1
+
+
+###
+GET http://192.168.10.87:3003/record/1/@matheus
+
+###
+GET http://192.168.10.87:3003/stop/1

@@ -25,7 +25,7 @@ export default {
         const { proceed, id } = req.query;
 
         const client = await getClient(id);
-        console.log("[CamCtrl.js-stop", client)
+        console.log("CamCtrl.js-stop", client)
 
         const camDB = await getCam(cam);
         if(!camDB) return res.status(404).send("Cam not found")

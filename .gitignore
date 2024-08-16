@@ -3,5 +3,5 @@ node_modules
 .env
 .idea
 .vscode
-media/no_watermark/*
-media/watermark/*
+src/public/media/watermark/*
+src/public/media/no_watermark/*
