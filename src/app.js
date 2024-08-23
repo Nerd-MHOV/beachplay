@@ -7,9 +7,9 @@ import {ExpressAdapter} from "@bull-board/express";
 import {createBullBoard} from "@bull-board/api";
 import {BullAdapter} from "@bull-board/api/bullAdapter";
 
-import CamCtrl from "./app/controllers/CamCtrl";
 import {v2 as cloudinary} from "cloudinary"
 import configCloudinary from "./config/cloudinary"
+import replayCtrl from "./app/controllers/replayCtrl";
 cloudinary.config(configCloudinary);
 
 const port = process.env.PORT || 3333
@@ -28,8 +28,8 @@ const app = express()
 app.use(express.json())
 // app.use(morgan('dev'))
 
-app.get("/record/:cam/:id", CamCtrl.record);
-app.get("/stop/:cam", CamCtrl.stop);
+// Rota para salvar os últimos 30 segundos em um arquivo output.mp4
+app.get('/save-replay/:camID/:clientID', replayCtrl.saveReplay);
 
 // bull route
 app.use(routeBullBoard, serverAdapter.getRouter())

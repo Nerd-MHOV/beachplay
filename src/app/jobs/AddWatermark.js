@@ -14,8 +14,6 @@ export default {
             path,
             isProceed = true,
         } = data;
-
-        const success = await FileCam.addWaterMark(path, isProceed)
-        // if(!success) throw new Error(` [ ERROR QUEUE ] - (AddWatermark) - ERROR TO ADD WATERMARK!`)
+        await FileCam.addWaterMark(path, isProceed)
     }
 }

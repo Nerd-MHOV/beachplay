@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -17,15 +17,15 @@ model Client {
 }
 
 model clientes {
-  id        Int    @id(map: "clientes_pk")
-  number    String @db.VarChar
-  password  String @default("-") @db.VarChar
+  id        Int    @id
+  number    String 
+  password  String @default("-") 
   id_qrcode Int    @unique(map: "clientes_pk2")
-  name      String @db.VarChar
+  name      String 
 }
 
 model qrcode {
-  id       Int     @id(map: "qrcode_pk")
+  id       Int     @id @default(autoincrement())
   qrcode   String  @unique
   path     String
   impresso Boolean @default(false)
