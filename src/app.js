@@ -10,6 +10,7 @@ import {BullAdapter} from "@bull-board/api/bullAdapter";
 import {v2 as cloudinary} from "cloudinary"
 import configCloudinary from "./config/cloudinary"
 import replayCtrl from "./app/controllers/replayCtrl";
+import authCtrl from "./app/controllers/authCtrl";
 cloudinary.config(configCloudinary);
 
 const port = process.env.PORT || 3333
@@ -30,6 +31,13 @@ app.use(express.json())
 
 // Rota para salvar os últimos 30 segundos em um arquivo output.mp4
 app.get('/save-replay/:camID/:clientID', replayCtrl.saveReplay);
+
+
+app.get("/verify", authCtrl.verify)
+
+app.get("/verify_id", authCtrl.verifyId)
+
+app.get("/qr", authCtrl.qr)
 
 // bull route
 app.use(routeBullBoard, serverAdapter.getRouter())

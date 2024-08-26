@@ -24,18 +24,19 @@ export default {
     async sendVideoToClient(linkVideo, clientId) {
         let messageToSend = this.getRandomMessage().replace('[Inserir Link]', linkVideo);
         const client = await getClient(clientId);
+        console.log(client);
         if(!client) {
             console.log(`Client not found ${clientId}`)
             return
         }
-        this.sendMessage(client.number, client.name, messageToSend)
+        this.sendMessage(client.phone, client.name, messageToSend)
             .then(res => {
                 console.log(`Success: to send message`)
-                this.sendMessage(client.number, client.name,
+                this.sendMessage(client.phone, client.name,
                     "Só lembrando, que mantemos seu video por apenas 24h. Então lembre-se de efetuar o download!")
             })
             .catch(e => {
-                console.log(e)
+                console.log(e.message)
             })
     },
 

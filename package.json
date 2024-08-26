@@ -7,8 +7,7 @@
     "dev": "npm-run-all -p dev:*",
     "dev:server": "nodemon src/app.js",
     "dev:queue": "nodemon src/queue.js",
-    "dev:cam1": "nodemon src/cams/cam1/index.js",
-    "dev:cam2": "nodemon src/cams/cam2/index.js",
+    "dev:cam": "nodemon src/cam.js",
     "build": "babel src --out-dir dist"
   },
   "dependencies": {
